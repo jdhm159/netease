@@ -81,6 +81,7 @@ public class App
                 return;
             }
             System.out.println("______________________________________________________________");
+            System.out.println();
             System.out.println(songInfos[songIndex].getName());
             System.out.println("   " + songInfos[songIndex].getArtists());
             System.out.println();
