@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.gene</groupId>
+  <artifactId>netease</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <name>netease</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.gene.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+  </properties>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.0.4.RELEASE</version>
+  </parent>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-tomcat</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>com.squareup.okhttp3</groupId>
+      <artifactId>okhttp</artifactId>
+      <version>3.14.2</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.62</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>netease</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.4</version>
+        <!-- 对要打的jar包进行配置 -->
+        <configuration>
+          <!-- Configuration of the archiver -->
+          <archive>
+            <!--生成的jar中，不要包含pom.xml和pom.properties这两个文件-->
+            <addMavenDescriptor>true</addMavenDescriptor>
+
+            <!-- Manifest specific configuration -->
+            <manifest>
+              <!--是否要把第三方jar放到manifest的classpath中-->
+              <addClasspath>true</addClasspath>
+
+              <!--生成的manifest中classpath的前缀，
+              因为要把第三方jar放到lib目录下，
+              所以classpath的前缀是lib/-->
+              <classpathPrefix>lib/</classpathPrefix>
+              <mainClass>com.gene.App</mainClass>
+            </manifest>
+          </archive>
+          <!--过滤掉不希望包含在jar中的文件-->
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.5.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>java</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <mainClass>pl.stasiak.pytel.SnmpClientApplication</mainClass>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
